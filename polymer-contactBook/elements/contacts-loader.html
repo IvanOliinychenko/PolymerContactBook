@@ -14,7 +14,7 @@
         <download-bar visibility="{{visibility}}"></download-bar>
         <div class="container" >
             <paper-shadow z="3"hidden?="{{!visibility}}">
-                <table>
+                <table  class="table bottom-board" style="margin: 0">
                     <tr class="header">
                         <td><h1><b>Contact book</b></h1></td>
                     </tr>
@@ -22,7 +22,7 @@
                         <td><h4>This Contact book contain {{contactBook.amount}} contacts</h4></td>
                     </tr>
                 </table>
-                    <table>
+                    <table class="table">
                         <thead>
                         <tr>
                             <th><h3><a data="firstName" reverse="{{orderbyFilter}}" on-tap="{{orderbyFilter}}" >Name</a></h3></th>
