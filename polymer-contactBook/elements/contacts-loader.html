@@ -1,0 +1,51 @@
+<link rel="import" href="/components/bower_components/polymer/polymer.html">
+<link rel="import" href="/components/bower_components/core-ajax/core-ajax.html">
+<link rel="import" href="/components/bower_components/paper-shadow/paper-shadow.html">
+
+<polymer-element name="contacts-loader">
+    <template>
+        <link rel="stylesheet" type="text/css" href="/elements/material-table.css">
+        <core-ajax
+                auto
+                url="https://script.google.com/macros/s/AKfycbzrnl4RsjevblKaA71SbqQxfL2_lYWezClDLDMZyX4yy2VlEOM_/exec"
+                handleAs="json"
+                response="{{response}}">
+        </core-ajax>
+        <download-bar visibility="{{visibility}}"></download-bar>
+        <div class="container" >
+            <paper-shadow z="3"hidden?="{{!visibility}}">
+                <table>
+                    <tr class="header">
+                        <td><h1><b>Contact book</b></h1></td>
+                    </tr>
+                    <tr>
+                        <td><h4>This Contact book contain {{contactBook.amount}} contacts</h4></td>
+                    </tr>
+                </table>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th><h3><a data="firstName" reverse="{{orderbyFilter}}" on-tap="{{orderbyFilter}}" >Name</a></h3></th>
+                            <th><h3><a data="name" on-tap="{{orderbyFilter}}" >Surname</a></h3></th>
+                            <th><h3><a data="birthDate" on-tap="{{orderbyFilter}}" >Age</a></h3></th>
+                            <th><h3><a data="tel" on-tap="{{orderbyFilter}}" >Phone</a></h3></th>
+                            <th><h3><a data="address" on-tap="{{orderbyFilter}}" >Address</a></h3></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <template repeat="{{contact in contactBook.contacts}}">
+                            <tr class="border_bottom" style="{{birthdaySoon(contact.birthDate.v)}}">
+                                <td>{{contact.firstName.v}}</td>
+                                <td>{{contact.name.v}}</td>
+                                <td>{{contact.birthDate.v | dateFilter}}</td>
+                                <td><a href="{{phoneFilter(contact.tel.v)}}">{{contact.tel.v}}</a></td>
+                                <td><a href="{{mapFilter(contact.address.v)}}">{{contact.address.v}}</a></td>
+                            </tr>
+                        </template>
+                        </tbody>
+                    </table>
+            </paper-shadow>
+        </div>
+    </template>
+    <script type="text/javascript" src="/elements/contactBook.js" ></script>
+</polymer-element>
